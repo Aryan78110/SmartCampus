@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus | Grievance Redressal Portal</title>
+    <!-- Google Fonts & Bootstrap -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #4338ca;
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+            --bg: #f8fafc;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: #0f172a;
+            min-height: 100vh;
+        }
+        .navbar-premium {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .glass-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+        }
+        .form-control, .form-select {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+        .btn-modern {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25);
+            transition: all 0.3s ease;
+        }
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.35);
+            color: white;
+        }
+        .badge-pill-status {
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .status-pending { background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+        .status-progress { background-color: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+        .status-resolved { background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+        .complaint-item {
+            border-bottom: 1px solid #f1f5f9;
+            padding: 16px;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .complaint-item:hover {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-premium sticky-top py-3">
+        <div class="container">
+            <div class="d-flex align-items-center gap-3">
+                <div class="brand-icon">
+                    <i class="bi bi-mortarboard-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0 fw-bold" style="letter-spacing: -0.3px;">SmartCampus™</h6>
+                    <small class="text-muted" style="font-size: 0.75rem;">Central Grievance Redressal System</small>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <a href="/admin" class="btn btn-outline-dark btn-sm rounded-pill px-3 py-2 fw-semibold">
+                    <i class="bi bi-shield-lock-fill me-1 text-primary"></i> Admin Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="container py-5">
+        
+        <!-- Hero Section -->
+        <div class="mb-4">
+            <span class="hero-badge mb-2"><i class="bi bi-lightning-charge-fill"></i> Automated Campus Support</span>
+            <h2 class="fw-extrabold mb-1" style="font-weight: 800; letter-spacing: -0.5px;">Student Grievance Portal</h2>
+            <p class="text-muted">Register and track real-time resolution for campus infrastructure, IT services, and amenities.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Complaint Submission Form -->
+            <div class="col-lg-5">
+                <div class="glass-card p-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="bg-primary-subtle text-primary p-2 rounded-3">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <h5 class="fw-bold mb-0">Lodge a Complaint</h5>
+                    </div>
+                    <form action="/submit" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary">Student Full Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="e.g., Alex Johnson" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary">University Roll Number</label>
+                            <input type="text" name="roll_no" class="form-control" placeholder="e.g., 2024CS104" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-secondary">Issue Category</label>
+                            <select name="category" class="form-select">
+                                <option value="Hostel & Accommodation">Hostel & Accommodation</option>
+                                <option value="Campus Wi-Fi & Network">Campus Wi-Fi & Network</option>
+                                <option value="Electricity & Classroom Infra">Electricity & Classroom Infra</option>
+                                <option value="Mess & Canteen">Mess & Canteen</option>
+                                <option value="Sanitation & Cleanliness">Sanitation & Cleanliness</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-secondary">Detailed Description</label>
+                            <textarea name="description" class="form-control" rows="3" placeholder="Provide specific details regarding the issue..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-modern w-100">
+                            Submit Grievance <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Real-time Complaints Feed -->
+            <div class="col-lg-7">
+                <div class="glass-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h5 class="fw-bold mb-0">Recent Grievances</h5>
+                            <small class="text-muted">Real-time status updates across departments</small>
+                        </div>
+                        <span class="badge bg-light text-dark border px-3 py-2 rounded-pill">{{ complaints|length }} Registered</span>
+                    </div>
+
+                    <div class="mt-3" style="max-height: 520px; overflow-y: auto;">
+                        {% for c in complaints %}
+                        <div class="complaint-item d-flex justify-content-between align-items-start gap-3">
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <span class="fw-bold text-dark">{{ c[1] }}</span>
+                                    <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;">{{ c[2] }}</span>
+                                    <span class="text-primary small fw-semibold">• {{ c[3] }}</span>
+                                </div>
+                                <p class="text-muted mb-0 small" style="line-height: 1.4;">{{ c[4] }}</p>
+                            </div>
+                            <div>
+                                {% if c[5] == 'Pending' %}
+                                    <span class="badge-pill-status status-pending"><i class="bi bi-clock me-1"></i>Pending</span>
+                                {% elif c[5] == 'In Progress' %}
+                                    <span class="badge-pill-status status-progress"><i class="bi bi-gear-wide-connected me-1"></i>In Progress</span>
+                                {% else %}
+                                    <span class="badge-pill-status status-resolved"><i class="bi bi-check2-circle me-1"></i>Resolved</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="text-center py-5 text-muted">
+                            <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
+                            No complaints registered yet.
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
