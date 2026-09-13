@@ -3,221 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Campus | Grievance Redressal Portal</title>
-    <!-- Google Fonts & Bootstrap -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>SmartCampus | Student Grievance Redressal Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         :root {
-            --primary: #4338ca;
-            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-            --bg: #f8fafc;
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            --card-shadow: 0 15px 35px -10px rgba(0,0,0,0.08);
         }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: #0f172a;
-            min-height: 100vh;
-        }
-        .navbar-premium {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
+        body { font-family: "Plus Jakarta Sans", sans-serif; background-color: #f8fafc; color: #334155; }
+        h1, h2, h3, h4, .brand-font { font-family: "Outfit", sans-serif; }
+        .glass-nav { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; }
+        .hero-section {
+            background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 50%), #ffffff;
+            padding: 80px 0 60px;
             border-bottom: 1px solid #e2e8f0;
         }
-        .brand-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: var(--primary-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 9999px;
-            background: #eef2ff;
-            color: #4f46e5;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
-        .glass-card {
-            background: #ffffff;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
-        }
-        .form-control, .form-select {
-            border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
-        }
-        .btn-modern {
-            background: var(--primary-gradient);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            font-weight: 600;
-            color: white;
-            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25);
-            transition: all 0.3s ease;
-        }
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.35);
-            color: white;
-        }
-        .badge-pill-status {
-            padding: 6px 14px;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-        }
-        .status-pending { background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
-        .status-progress { background-color: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
-        .status-resolved { background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
-        .complaint-item {
-            border-bottom: 1px solid #f1f5f9;
-            padding: 16px;
-            border-radius: 12px;
-            transition: background 0.2s;
-        }
-        .complaint-item:hover {
-            background-color: #f8fafc;
-        }
+        .hero-img { border-radius: 24px; width: 100%; height: 380px; object-fit: cover; box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.2); border: 5px solid #ffffff; }
+        .stat-card { background: #ffffff; border: 1px solid #f1f5f9; border-radius: 18px; padding: 22px; box-shadow: var(--card-shadow); }
+        .btn-gradient { background: var(--gradient); color: #ffffff !important; border: none; padding: 10px 22px; border-radius: 10px; font-weight: 700; }
+        .track-box { background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; padding: 35px; }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-premium sticky-top py-3">
-        <div class="container">
-            <div class="d-flex align-items-center gap-3">
-                <div class="brand-icon">
-                    <i class="bi bi-mortarboard-fill fs-5"></i>
+    <nav class="navbar glass-nav py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
+                <div class="rounded-3 p-2 text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: var(--gradient);">
+                    <i class="fa-solid fa-bullhorn fs-5"></i>
                 </div>
-                <div>
-                    <h6 class="mb-0 fw-bold" style="letter-spacing: -0.3px;">SmartCampus™</h6>
-                    <small class="text-muted" style="font-size: 0.75rem;">Central Grievance Redressal System</small>
-                </div>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-                <a href="/admin" class="btn btn-outline-dark btn-sm rounded-pill px-3 py-2 fw-semibold">
-                    <i class="bi bi-shield-lock-fill me-1 text-primary"></i> Admin Dashboard
-                </a>
+                <span class="fw-bold fs-4 text-dark brand-font">Smart<span style="color: var(--primary);">Campus</span> <span class="badge bg-danger fs-6 align-middle">Grievance</span></span>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <a href="#track-section" class="btn btn-outline-secondary fw-semibold px-3 py-2 rounded-3"><i class="fa-solid fa-magnifying-glass me-1"></i> Track Status</a>
+                <a href="/login" class="btn btn-outline-primary fw-semibold px-3 py-2 rounded-3"><i class="fa-solid fa-user-graduate me-1"></i> Student Login</a>
+                <!-- DIRECT ADMIN PORTAL BUTTON -->
+                <a href="/login" class="btn btn-dark fw-semibold px-3 py-2 rounded-3"><i class="fa-solid fa-user-shield me-1"></i> Admin Portal</a>
             </div>
         </div>
     </nav>
 
-    <!-- Content Container -->
-    <div class="container py-5">
-        
-        <!-- Hero Section -->
-        <div class="mb-4">
-            <span class="hero-badge mb-2"><i class="bi bi-lightning-charge-fill"></i> Automated Campus Support</span>
-            <h2 class="fw-extrabold mb-1" style="font-weight: 800; letter-spacing: -0.5px;">Student Grievance Portal</h2>
-            <p class="text-muted">Register and track real-time resolution for campus infrastructure, IT services, and amenities.</p>
-        </div>
-
-        <div class="row g-4">
-            <!-- Complaint Submission Form -->
-            <div class="col-lg-5">
-                <div class="glass-card p-4">
-                    <div class="d-flex align-items-center gap-2 mb-3">
-                        <div class="bg-primary-subtle text-primary p-2 rounded-3">
-                            <i class="bi bi-pencil-square"></i>
-                        </div>
-                        <h5 class="fw-bold mb-0">Lodge a Complaint</h5>
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-semibold mb-3">
+                        <i class="fa-solid fa-shield-halved"></i> 24x7 Digital Campus Grievance Redressal
+                    </span>
+                    <h1 class="display-5 fw-extrabold text-dark mb-3 lh-sm">
+                        Direct Resolution for All <br>
+                        <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Campus Problems & Queries</span>
+                    </h1>
+                    <p class="lead text-muted mb-4 pe-lg-3">
+                        Hostel, Mess, Wi-Fi, Academics, or Maintenance issues. Register your grievance through your verified student profile and track live progress using your unique reference ID.
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap">
+                        <a href="/login" class="btn btn-gradient btn-lg fs-6"><i class="fa-solid fa-pen-to-square me-2"></i> File a Complaint</a>
+                        <a href="/register" class="btn btn-outline-primary btn-lg fs-6 fw-semibold"><i class="fa-solid fa-user-plus me-2"></i> Student Registration</a>
                     </div>
-                    <form action="/submit" method="POST">
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Student Full Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="e.g., Alex Johnson" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">University Roll Number</label>
-                            <input type="text" name="roll_no" class="form-control" placeholder="e.g., 2024CS104" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold text-secondary">Issue Category</label>
-                            <select name="category" class="form-select">
-                                <option value="Hostel & Accommodation">Hostel & Accommodation</option>
-                                <option value="Campus Wi-Fi & Network">Campus Wi-Fi & Network</option>
-                                <option value="Electricity & Classroom Infra">Electricity & Classroom Infra</option>
-                                <option value="Mess & Canteen">Mess & Canteen</option>
-                                <option value="Sanitation & Cleanliness">Sanitation & Cleanliness</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label small fw-bold text-secondary">Detailed Description</label>
-                            <textarea name="description" class="form-control" rows="3" placeholder="Provide specific details regarding the issue..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-modern w-100">
-                            Submit Grievance <i class="bi bi-arrow-right ms-2"></i>
-                        </button>
-                    </form>
+                </div>
+                <div class="col-lg-5">
+                    <img class="hero-img" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80" alt="Students Support Desk">
                 </div>
             </div>
 
-            <!-- Real-time Complaints Feed -->
-            <div class="col-lg-7">
-                <div class="glass-card p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <h5 class="fw-bold mb-0">Recent Grievances</h5>
-                            <small class="text-muted">Real-time status updates across departments</small>
-                        </div>
-                        <span class="badge bg-light text-dark border px-3 py-2 rounded-pill">{{ complaints|length }} Registered</span>
-                    </div>
+            <div class="row g-4 mt-4">
+                <div class="col-6 col-md-3"><div class="stat-card text-center"><div class="text-primary mb-2 fs-3"><i class="fa-solid fa-clipboard-list"></i></div><h3 class="fw-bold mb-0 text-dark">1,240+</h3><small class="text-muted fw-semibold">Total Lodged</small></div></div>
+                <div class="col-6 col-md-3"><div class="stat-card text-center"><div class="text-success mb-2 fs-3"><i class="fa-solid fa-circle-check"></i></div><h3 class="fw-bold mb-0 text-dark">1,180+</h3><small class="text-muted fw-semibold">Resolved</small></div></div>
+                <div class="col-6 col-md-3"><div class="stat-card text-center"><div class="text-warning mb-2 fs-3"><i class="fa-solid fa-hourglass-half"></i></div><h3 class="fw-bold mb-0 text-dark">60</h3><small class="text-muted fw-semibold">In Progress</small></div></div>
+                <div class="col-6 col-md-3"><div class="stat-card text-center"><div class="text-danger mb-2 fs-3"><i class="fa-solid fa-bolt"></i></div><h3 class="fw-bold mb-0 text-dark">&lt; 24 Hrs</h3><small class="text-muted fw-semibold">Avg Turnaround</small></div></div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="mt-3" style="max-height: 520px; overflow-y: auto;">
-                        {% for c in complaints %}
-                        <div class="complaint-item d-flex justify-content-between align-items-start gap-3">
-                            <div class="flex-grow-1">
-                                <div class="d-flex align-items-center gap-2 mb-1">
-                                    <span class="fw-bold text-dark">{{ c[1] }}</span>
-                                    <span class="badge bg-light text-secondary border" style="font-size: 0.7rem;">{{ c[2] }}</span>
-                                    <span class="text-primary small fw-semibold">• {{ c[3] }}</span>
+    <!-- Public Tracking Section -->
+    <section id="track-section" class="py-5 bg-white">
+        <div class="container py-3">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="track-box text-center">
+                        <div class="mb-3 text-primary fs-2"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                        <h3 class="fw-bold text-dark mb-2">Track Complaint Status</h3>
+                        <p class="text-muted mb-4 small">Enter your unique reference ID (e.g., CMP-4821) below</p>
+                        
+                        <form action="/#track-section" method="GET" class="input-group mb-3">
+                            <input type="text" name="search_ticket" value="{{ search_ticket or '' }}" class="form-control form-control-lg fs-6" placeholder="Enter Reference ID (e.g., CMP-1234)" required>
+                            <button class="btn btn-primary px-4" type="submit"><i class="fa-solid fa-search me-1"></i> Track</button>
+                        </form>
+
+                        {% if searched %}
+                            {% if complaint_data %}
+                                <div class="card border-0 bg-light p-4 text-start rounded-4 mt-4 border-start border-primary border-4 shadow-sm">
+                                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                        <h5 class="fw-bold text-dark mb-0">Ticket: <span class="text-primary font-monospace">{{ complaint_data[0] }}</span></h5>
+                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">{{ complaint_data[5] }}</span>
+                                    </div>
+                                    <hr class="my-2">
+                                    <div class="row g-2">
+                                        <div class="col-sm-6"><small class="text-muted">Student:</small><p class="fw-semibold mb-1">{{ complaint_data[1] }} (Roll No: {{ complaint_data[2] }})</p></div>
+                                        <div class="col-sm-6"><small class="text-muted">Category:</small><p class="fw-semibold mb-1">{{ complaint_data[3] }}</p></div>
+                                        <div class="col-12"><small class="text-muted">Description:</small><p class="bg-white p-3 rounded-3 border mb-1">{{ complaint_data[4] }}</p></div>
+                                        <div class="col-12"><small class="text-muted"><i class="fa-regular fa-clock me-1"></i> Date Lodged: {{ complaint_data[6] }}</small></div>
+                                    </div>
                                 </div>
-                                <p class="text-muted mb-0 small" style="line-height: 1.4;">{{ c[4] }}</p>
-                            </div>
-                            <div>
-                                {% if c[5] == 'Pending' %}
-                                    <span class="badge-pill-status status-pending"><i class="bi bi-clock me-1"></i>Pending</span>
-                                {% elif c[5] == 'In Progress' %}
-                                    <span class="badge-pill-status status-progress"><i class="bi bi-gear-wide-connected me-1"></i>In Progress</span>
-                                {% else %}
-                                    <span class="badge-pill-status status-resolved"><i class="bi bi-check2-circle me-1"></i>Resolved</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="text-center py-5 text-muted">
-                            <i class="bi bi-inbox fs-1 d-block mb-2 text-secondary"></i>
-                            No complaints registered yet.
-                        </div>
-                        {% endfor %}
+                            {% else %}
+                                <div class="alert alert-warning rounded-3 mt-3">No record found matching Reference ID <b>"{{ search_ticket }}"</b>.</div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <footer class="py-4 bg-dark text-white text-center">
+        <div class="container"><p class="mb-0 text-white-50 small">&copy; 2026 SmartCampus Grievance Redressal System. All rights reserved.</p></div>
+    </footer>
 </body>
 </html>
