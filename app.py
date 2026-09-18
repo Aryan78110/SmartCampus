@@ -1,3 +1,6 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo
 import os
 import random
 import sqlite3
@@ -6,6 +9,9 @@ from email.mime.text import MIMEText
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 
 app = Flask(__name__)
+
+def get_ist_time():
+    return datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%Y-%m-%d %I:%M %p")
 app.secret_key = "smartcampus_master_secret_2026"
 DB_FILE = "campus.db"
 
@@ -184,20 +190,21 @@ def dashboard():
 
 @app.route("/submit-complaint", methods=["POST"])
 def submit_complaint():
-    if 'student' not in session:
+    if "student" not in session:
         return redirect(url_for("login"))
 
-    student = session['student']
+    student = session["student"]
     category = request.form.get("category")
     description = request.form.get("description")
     ticket_id = f"CMP-{random.randint(1000, 9999)}"
+    ist_time = datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%d %b %Y, %I:%M %p")
 
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO complaints (ticket_id, student_mobile, student_name, roll_no, category, description, status)
-        VALUES (?, ?, ?, ?, ?, ?, 'Pending Review')
-    """, (ticket_id, student['mobile'], student['name'], student['roll_no'], category, description))
+        INSERT INTO complaints (ticket_id, student_mobile, student_name, roll_no, category, description, status, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, "Pending Review", ?)
+    """, (ticket_id, student["mobile"], student["name"], student["roll_no"], category, description, ist_time))
     conn.commit()
     conn.close()
 
@@ -237,10 +244,27 @@ def update_status():
 
     return redirect(url_for("admin"))
 
+
+
+@app.route("/admin-login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        u = request.form.get("username", "").strip()
+        p = request.form.get("password", "").strip()
+        if u == "aryan" and p == "aryan1234":
+            session["is_admin"] = True
+            flash("Admin access granted.", "success")
+            return redirect("/admin")
+        flash("Invalid Admin Credentials", "danger")
+    return render_template("admin_login.html")
+
 @app.route("/logout")
 def logout():
+    is_admin = session.get("is_admin") is True
     session.clear()
-    flash("Logged out successfully.", "info")
+    flash("Successfully logged out.", "info")
+    if is_admin:
+        return redirect(url_for("admin_login"))
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
